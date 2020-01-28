@@ -10,6 +10,8 @@ services:
       - .public/data:/portfolio_app/public
       - ./tmp/data:/portfolio_app/tmp
       - ./log/data:/portfolio_app/log
+    ports:
+      - "3000:3000" 
     depends_on:
       - db
 
@@ -27,6 +29,6 @@ services:
       - ./public/data:/portfolio_app/public
       - ./tmp/data:/portfolio_app/tmp
     ports:
-      - 80:80
+      - "80:80"
     depends_on:
       - app
