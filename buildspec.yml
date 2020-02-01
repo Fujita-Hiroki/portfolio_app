@@ -15,8 +15,8 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build --no-cache -t $portfolio_app-image-repo:$latest .
-      - docker tag $portfolio_app-image-repo:$latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$portfolio_app-image-repo:$latest
+      - docker build --no-cache -t $portfolio_app-image-repo:latest .
+      - docker tag $portfolio_app-image-repo:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$portfolio_app-image-repo:$latest
   post_build:
     commands:
       - echo Build completed on `date`
