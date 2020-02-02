@@ -20,9 +20,9 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Pushing the Docker image
+      - echo Pushing the Docker image...
       - docker push 622169599480.dkr.ecr.ap-northeast-1.amazonaws.com/portfolio_app-image-repo:latest
-      - echo '[{"name":"portfolio_app-container","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
+      - printf '[{"name":"portfolio_app-container","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
 
 artifacts:
   type: zip 
