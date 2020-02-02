@@ -24,5 +24,6 @@ phases:
       - docker push 622169599480.dkr.ecr.ap-northeast-1.amazonaws.com/portfolio_app-image-repo:latest
       - echo "[{\"name\":\"${portfolio_app-container}\",\"imageUri\":\"${REPOSITORY_URI}:${latest}\"}]" > imagedefinitions.json
   artifacts:
-    files: imagedefinitions.json
+    files: 
+      - imagedefinitions.json
 
