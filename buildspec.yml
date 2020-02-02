@@ -16,10 +16,13 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t portfolio_app-image-repo:latest .
-      - docker tag portfolio_app-image-repo:latest 622169599480.dkr.ecr.ap-northeast-1.amazonaws.com/$portfolio_app-image-repo:latest
+      - docker tag portfolio_app-image-repo:latest 622169599480.dkr.ecr.ap-northeast-1.amazonaws.com/portfolio_app-image-repo:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image
       - docker push 622169599480.dkr.ecr.ap-northeast-1.amazonaws.com/portfolio_app-image-repo:latest
-  
+      - echo "[{\"name\":\"${portfolio_app-container}\",\"imageUri\":\"${REPOSITORY_URI}:${latest}\"}]" > imagedefinitions.json
+  artifacts:
+    files: imagedefinitions.json
+
