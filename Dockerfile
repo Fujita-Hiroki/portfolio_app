@@ -17,3 +17,11 @@ RUN apt-get update && \
     apt-get install --no-install-recommends yarn && \
     gem install bundler && \
     bundle install
+
+ADD . /$APP_ROOT
+RUN mkdir -p tmp/sockets
+
+VOLUME /$APP_ROOT/public
+VOLUME /$APP_ROOT/tmp
+
+CMD bundle exec puma
