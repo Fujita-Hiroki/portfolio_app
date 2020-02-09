@@ -2,7 +2,6 @@ version: '3'
 services:
   app:
     build: .
-    image: rails
     env_file:
       - ./environments/db.env
     command: bundle exec puma -C config/puma.rb
@@ -26,7 +25,6 @@ services:
   web:
     build:
       context: containers/nginx
-      image: nginx
     volumes:
       - public/data:/portfolio_app/public
       - tmp/data:/portfolio_app/tmp
