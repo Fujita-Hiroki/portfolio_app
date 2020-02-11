@@ -21,6 +21,8 @@ services:
       - ./environments/db.env
     volumes:
       - ./db/data:/var/lib/mysql
+    ports: 
+      - "3306:3306"
 
   web:
     build:
@@ -29,6 +31,6 @@ services:
       - ./public/data:/portfolio_app/public
       - ./tmp/data:/portfolio_app/tmp
     ports:
-      - "3000:3000"
+      - "8080:8080"
     depends_on:
       - app
