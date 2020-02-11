@@ -10,22 +10,22 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - NGINX_IMAGE_URI=$ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/$NGINX_REPO_NAME
-      - RAILS_IMAGE_URI=$ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/$RAILS_REPO_NAME
+      - NGINX_IMAGE_URI=$AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/$NGINX_REPO_NAME
+      - RAILS_IMAGE_URI=$AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/$RAILS_REPO_NAME
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t $NGINX_IMAGE_URI:latest .
-      - docker build -t $RAILS_IMAGE_URI:latest .
+      - docker build -t $NGINX_IMAGE_URI:$IMAGE_TAG .
+      - docker build -t $RAILS_IMAGE_URI:$IMAGE_TAG .
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $NGINX_IMAGE_URI:latest
-      - docker push $RAILS_IMAGE_URI:latest
-      - printf '[{"name":"nginx","imageUri":"%s"}]' $NGINX_IMAGE_URI:latest > imagedefinitions.json
-      - printf '[{"name":"rails","imageUri":"%s"}]' $RAILS_IMAGE_URI:latest > imagedefinitions.json
+      - docker push $NGINX_IMAGE_URI:$IMAGE_TAG
+      - docker push $RAILS_IMAGE_URI:$IMAGE_TAG
+      - printf '[{"name":"$CONTAINAR_NAME1","imageUri":"%s"}]' $NGINX_IMAGE_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"$CONTAINAR_NAME2","imageUri":"%s"}]' $RAILS_IMAGE_URI:$IMAGE_TAG > imagedefinitions.json
 
 artifacts:
   type: zip 
