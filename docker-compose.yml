@@ -31,6 +31,6 @@ services:
       - ./public/data:/portfolio_app/public
       - ./tmp/data:/portfolio_app/tmp
     ports:
-      - "8080:8080"
+      - "80:80"
     depends_on:
       - app
